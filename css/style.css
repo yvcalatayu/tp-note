@@ -68,3 +68,17 @@ form input {
 .box-error {
     border: 1px solid red;
 }
+
+/* Movie */
+.movie h5 {
+    text-align: center;
+}
+
+.movie img {
+    width: 80%;
+    margin: auto;
+}
+
+.movie p {
+    text-align: justify;
+}
