@@ -6,20 +6,41 @@
 </head>
     <body>
         <div id="app">
-            <navbar></navbar>
+            
+            <navbar @show-movies="loadMovies" @clear-movies="clearMovies"></navbar>
+            <h1></h1>
+            <movie-card v-for="movie in movies" :key="movie.id" :movie="movie"></movie-card>
         </div>
-        <p>
-            <!-- use the router-link component for navigation. -->
-            <!-- specify the link by passing the `to` prop. -->
-            <!-- `<router-link>` will render an `<a>` tag with -->
-            <!-- the correct `href` attribute -->
-            <router-link to="/">Go to Home</router-link>
-            <router-link to="/about">Go to About</router-link>
-        </p>
-        <router-view></router-view>
+        <script src="/src/misc/stubMovie.js"></script>
+        <script type="module">
+            import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+            import Navbar from './src/view/navbar.js';
+            import MovieCard from './src/view/movie-card.js';
 
-        <script type="module" src="./main.js"></script>
-        <script src="https://unpkg.com/vue@3"></script>
-        <script src="https://unpkg.com/vue-router@4"></script>
+            const app = createApp({
+                data() {
+                    return {
+                        movies: []
+                    }
+                },
+                methods: {
+                    loadMovies() {
+                        try {
+                            this.movies = JSON.parse(Movies);
+                        } catch (error) {
+                            console.error('Error parsing JSON:', error);
+                        }
+                    },
+                    clearMovies() {
+                        this.movies = []
+                    }
+                }
+            });
+
+            app.component('navbar', Navbar)
+                .component('movieCard', MovieCard);
+
+            app.mount('#app');
+          </script>
     </body>
 </html>
