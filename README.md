@@ -19,6 +19,7 @@
 9) Au clic sur le lien "Ajouter un film", afficher un formulaire permettant d'ajouter un Movie { id, name, description, image }. Le résultat sera affiché sur la page "Tous les films"
 10) Mettre en place une vérification d'erreur dans le formulaire d'ajout de Movie (champs obligatoires, name 5 caractères mini / 30 caractères maxi, description 30 caractères mini) pour chaque champ (message d'erreur + mise en avant du champ correspondant)
 11) Créer une classe générique `ApiService` permettant de faire des appels de type GET ou POST qui retourneront des données au format JSON (cette classe doit fonctionner peu importe l'URL et le verbe utilisés)
+12) Ajout un champ de recherche sur la liste de tous les films. Lorsque l'utilisateur saisi un caractère, la liste des films se filtre si une correspondance est trouvée dans le titre du film
 
 ## Bonus
 
@@ -30,3 +31,4 @@
 
 - Un stub/bouchon est une méthode permettant d'intégrer des données factices dans une application. Comme par exemple avec un fichier JSON.
 - L'image du film devra être affichée dans une balise img
+- Sur un `input` l'évènement permettant de détecter un changement se nomme `change`
