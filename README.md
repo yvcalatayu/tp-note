@@ -20,6 +20,7 @@
 10) Mettre en place une vérification d'erreur dans le formulaire d'ajout de Movie (champs obligatoires, name 5 caractères mini / 30 caractères maxi, description 30 caractères mini) pour chaque champ (message d'erreur + mise en avant du champ correspondant)
 11) Créer une classe générique `ApiService` permettant de faire des appels de type GET ou POST qui retourneront des données au format JSON (cette classe doit fonctionner peu importe l'URL et le verbe utilisés)
 12) Ajout un champ de recherche sur la liste de tous les films. Lorsque l'utilisateur saisi un caractère, la liste des films se filtre si une correspondance est trouvée dans le titre du film
+13) Sur le composant "MovieCard", ajouter un bouton permettant d'indiquer si le film a été vu ou non. Si on clic sur le bouton alors le titre du fil passera en vert (`color: green`)
 
 ## Bonus
 
