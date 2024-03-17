@@ -43,17 +43,17 @@ export default {
     template: `
       <div>
         <form @submit.prevent="addMovie">
-          <div>
+          <div class="input-group">
             <label for="title">Nom du film:</label>
             <input type="text" id="title" v-model="newMovie.title" :class="{ 'box-error': errors.description }">
             <div class="text-error">{{ errors.name }}</div>
           </div>
-          <div>
+          <div class="input-group">
             <label for="description">Description:</label>
             <textarea id="description" v-model="newMovie.description" :class="{ 'box-error': errors.description }"></textarea>
             <div class="text-error">{{ errors.description }}</div>
           </div>
-          <div>
+          <div class="input-group">
             <label for="image">Image URL:</label>
             <input type="text" id="image" v-model="newMovie.image">
           </div>

@@ -11,13 +11,11 @@ export default {
     this.links = new LinkService().getLinks();
   },
   template: `
-    <nav>
-      <a v-for="link in links" 
-        :key="link.id" 
-        :href="link.link" 
-        @click="handleLinkClick(link.link)">{{ link.label }}
-      </a>
-    </nav>
+  <nav>
+    <template v-for="link in links" class="menu-pannel">
+      <a :key="link.id" :href="link.link" @click="handleLinkClick(link.link)" class="menu-pannel-item">{{ link.label }}</a>
+    </template>
+  </nav>
   `,
 
   methods: {

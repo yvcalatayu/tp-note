@@ -9,8 +9,10 @@
             
             <navbar @show-movies="loadMovies" @page-changed="changePage($event)"></navbar>
             <h1>Home</h1>
+            <div class="col-6 text-center pointer">
+                <movie-card v-if="activePage === 'all-movies'" v-for="movie in movies" :key="movie.id" :movie="movie"></movie-card>
+            </div>
             <movie-form v-if="activePage === 'add-movies'" @add-movie="addMovie"></movie-form>
-            <movie-card v-if="activePage === 'all-movies'" v-for="movie in movies" :key="movie.id" :movie="movie"></movie-card>
         </div>
         <script src="/src/misc/stubMovie.js"></script>
         <script type="module">
