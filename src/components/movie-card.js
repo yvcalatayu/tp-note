@@ -3,10 +3,12 @@ export default {
     movie: Object,
   },
   template: `
-    <div class="movie-card">
-      <h2>{{ movie.title }}</h2>
-      <p>{{ truncatedDescription }}</p>
-      <img :src="movie.image" alt="Movie Poster">
+    <div class="card">
+      <div class="movie">
+        <h5>{{ movie.title }}</h5>
+        <p>{{ truncatedDescription }}</p>
+        <img :src="movie.image" alt="Movie Poster">
+      </div>
     </div>
   `,
   computed: {

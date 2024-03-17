@@ -7,38 +7,59 @@
     <body>
         <div id="app">
             
-            <navbar @show-movies="loadMovies" @clear-movies="clearMovies"></navbar>
-            <h1></h1>
-            <movie-card v-for="movie in movies" :key="movie.id" :movie="movie"></movie-card>
+            <navbar @show-movies="loadMovies" @page-changed="changePage($event)"></navbar>
+            <h1>Home</h1>
+            <movie-form v-if="activePage === 'add-movies'" @add-movie="addMovie"></movie-form>
+            <movie-card v-if="activePage === 'all-movies'" v-for="movie in movies" :key="movie.id" :movie="movie"></movie-card>
         </div>
         <script src="/src/misc/stubMovie.js"></script>
         <script type="module">
             import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
             import Navbar from './src/view/navbar.js';
-            import MovieCard from './src/view/movie-card.js';
+            import MovieCard from './src/components/movie-card.js';
+            import MovieForm from './src/components/movie-form.js';
 
             const app = createApp({
                 data() {
                     return {
-                        movies: []
+                        movies: [],
+                        showForm: false,
+                        activePage: 'home'
                     }
                 },
                 methods: {
                     loadMovies() {
                         try {
-                            this.movies = JSON.parse(Movies);
+                            const storedMovies = JSON.parse(localStorage.getItem('movies')) || [];
+        
+                            // Charger les films à partir du stub
+                            const stubMovies = JSON.parse(Movies);
+
+                            // Combinez les films du stub avec ceux du localStorage
+                            this.movies = [...stubMovies, ...storedMovies];
                         } catch (error) {
                             console.error('Error parsing JSON:', error);
                         }
                     },
-                    clearMovies() {
-                        this.movies = []
+                    addMovie(movie) {
+                        const storedMovies = JSON.parse(localStorage.getItem('movies')) || [];
+
+                        const newMovieList = [...storedMovies, { id: storedMovies.length + 1, ...movie }];
+
+                        this.movies = newMovieList;
+
+                        localStorage.setItem('movies', JSON.stringify(newMovieList));
+                    },
+                    changePage(page) {
+                        this.activePage = page;
+                        console.log(this.activePage);
                     }
                 }
             });
 
             app.component('navbar', Navbar)
-                .component('movieCard', MovieCard);
+               .component('movieCard', MovieCard)
+               .component('movieForm', MovieForm);
 
             app.mount('#app');
           </script>
