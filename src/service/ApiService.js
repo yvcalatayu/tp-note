@@ -1,8 +1,21 @@
+import Movie from '../dto/movie.js';
+
 class ApiService {
     static async get(url) {
         try {
             const response = await fetch(url);
-            return await response.json();
+            const data = await response.json();
+
+            const movies = data.map(movieData => {
+                const id = data.indexOf(movieData);
+                const title = movieData.Title;
+                const description = movieData.Year;
+                const image = movieData.Poster;
+
+                return new Movie(id, title, description, image);
+            });
+
+            return movies;
         } catch (error) {
             console.error('Error fetching data:', error);
             throw error;

@@ -12,9 +12,7 @@ export default {
   },
   template: `
   <nav>
-    <template v-for="link in links" class="menu-pannel">
-      <a :key="link.id" :href="link.link" @click="handleLinkClick(link.link)" class="menu-pannel-item">{{ link.label }}</a>
-    </template>
+      <a v-for="link in links" :key="link.id" :href="link.link" @click="handleLinkClick(link.link)" class="menu-pannel-item">{{ link.label }}</a>
   </nav>
   `,
 
@@ -25,7 +23,6 @@ export default {
 
       this.$emit('hide-form');
       let page
-      // Mettre à jour la page active
       if (clickedLink.id === 1) {
         page = 'all-movies';
         this.$emit('show-movies');

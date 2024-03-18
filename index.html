@@ -6,39 +6,42 @@
 </head>
     <body>
         <div id="app">
-            
             <navbar @show-movies="loadMovies" @page-changed="changePage($event)"></navbar>
+            <input v-if="activePage === 'all-movies'" type="text" v-model="searchQuery" placeholder="Rechercher un film...">
             <h1>Home</h1>
             <div class="col-6 text-center pointer">
-                <movie-card v-if="activePage === 'all-movies'" v-for="movie in movies" :key="movie.id" :movie="movie"></movie-card>
+                <movie-card v-if="activePage === 'all-movies'" v-for="movie in filteredMovies" :key="movie.id" :movie="movie"></movie-card>
             </div>
             <movie-form v-if="activePage === 'add-movies'" @add-movie="addMovie"></movie-form>
         </div>
+        
         <script src="/src/misc/stubMovie.js"></script>
         <script type="module">
             import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
             import Navbar from './src/view/navbar.js';
             import MovieCard from './src/components/movie-card.js';
             import MovieForm from './src/components/movie-form.js';
+            import ApiService from './src/service/ApiService.js';
 
             const app = createApp({
                 data() {
                     return {
                         movies: [],
                         showForm: false,
-                        activePage: 'home'
+                        activePage: 'home',
+                        searchQuery: ''
                     }
                 },
                 methods: {
-                    loadMovies() {
+                    async loadMovies() {
                         try {
                             const storedMovies = JSON.parse(localStorage.getItem('movies')) || [];
         
-                            // Charger les films à partir du stub
                             const stubMovies = JSON.parse(Movies);
 
-                            // Combinez les films du stub avec ceux du localStorage
-                            this.movies = [...stubMovies, ...storedMovies];
+                            const response = await ApiService.get('https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies');
+
+                            this.movies = [...response, ...stubMovies, ...storedMovies];
                         } catch (error) {
                             console.error('Error parsing JSON:', error);
                         }
@@ -55,6 +58,19 @@
                     changePage(page) {
                         this.activePage = page;
                         console.log(this.activePage);
+                    },
+                    filterMovies() {
+                        return this.movies.filter(movie =>
+                            movie.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+                        );
+                    }
+                },
+                computed: {
+                    filteredMovies() {
+                        if (!this.searchQuery) {
+                            return this.movies;
+                        }
+                        return this.filterMovies();
                     }
                 }
             });
