@@ -21,6 +21,8 @@
 11) Créer une classe générique `ApiService` permettant de faire des appels de type GET ou POST qui retourneront des données au format JSON (cette classe doit fonctionner peu importe l'URL et le verbe utilisés)
 12) Ajout un champ de recherche sur la liste de tous les films. Lorsque l'utilisateur saisi un caractère, la liste des films se filtre si une correspondance est trouvée dans le titre du film
 13) Sur le composant "MovieCard", ajouter un bouton permettant d'indiquer si le film a été vu ou non. Si on clic sur le bouton alors le titre du fil passera en vert (`color: green`)
+14) En utilisant le client HTTP créé précédemment, récupérez les données issues de ce site : https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies
+15) Afficher les films récupérés en tête des films de la page "Tous les films"
 
 ## Bonus
 
